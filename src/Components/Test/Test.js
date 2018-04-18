@@ -7,7 +7,7 @@ class Test extends React.Component {
     }
 
     componentDidMount() {
-        fetch(`${process.env.PUBLIC_URL}/data.json`)
+        fetch(`${process.env.PUBLIC_URL}/data/data.json`)
             .then(
                 response => response.json()
             ).then(
@@ -20,9 +20,16 @@ class Test extends React.Component {
 
         return (
             <div>
-                {
-                    console.log(data)
-                }
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
         )
     }
