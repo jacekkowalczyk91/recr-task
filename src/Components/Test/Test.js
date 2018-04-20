@@ -4,7 +4,19 @@ import {Table} from 'react-bootstrap'
 class Test extends React.Component {
 
     state = {
-        data: null
+        data: null,
+        filteredId: '',
+        filteredFirstName: '',
+        filteredLastName: '',
+        filteredDateOfBirth: '',
+        filteredCompany: '',
+        filteredNote: ''
+    }
+
+    handleInputChange = event => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
     }
 
     componentDidMount() {
@@ -28,6 +40,57 @@ class Test extends React.Component {
                     responsive
                 >
                     <thead>
+                    <tr>
+                        <td>
+                            <input
+                                name='filteredId'
+                                type='text'
+                                value={this.state.filteredId}
+                                onChange={this.handleInputChange}
+                            />
+                        </td>
+                        <td>
+                            <input
+                                name='filteredFirstName'
+                                type='text'
+                                value={this.state.filteredFirstName}
+                                onChange={this.handleInputChange}
+                            />
+                        </td>
+                        <td>
+                            <input
+                                name='filteredLastName'
+                                type='text'
+                                value={this.state.filteredLastName}
+                                onChange={this.handleInputChange}
+                            />
+                        </td>
+                        <td>
+                            <input
+                                name='filteredDateOfBirth'
+                                type='text'
+                                value={this.state.filteredDateOfBirth}
+                                onChange={this.handleInputChange}
+                            />
+                        </td>
+                        <td>
+                            <input
+                                name='filteredCompany'
+                                type='text'
+                                value={this.state.filteredCompany}
+                                onChange={this.handleInputChange}
+                            />
+                        </td>
+                        <td>
+                            <input
+                                name='filteredNote'
+                                type='text'
+                                value={this.state.filteredNote}
+                                onChange={this.handleInputChange}
+                            />
+                        </td>
+
+                    </tr>
                     <tr>
                         <th>id</th>
                         <th>First name</th>
