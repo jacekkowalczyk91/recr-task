@@ -29,12 +29,29 @@ class Test extends React.Component {
                 >
                     <thead>
                     <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <th>id</th>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Date of birth</th>
+                        <th>Company</th>
+                        <th>Note</th>
                     </tr>
                     </thead>
+                    <tbody>
+                    {
+                        data && data.map(
+                            data =>
+                                <tr key={data.id}>
+                                    <td>{data.id}</td>
+                                    <td>{data.firstName}</td>
+                                    <td>{data.lastName}</td>
+                                    <td>{data.dateOfBirth}</td>
+                                    <td>{data.company}</td>
+                                    <td>{data.note}</td>
+                                </tr>
+                        )
+                    }
+                    </tbody>
                 </Table>
             </div>
         )
