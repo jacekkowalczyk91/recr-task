@@ -1,5 +1,8 @@
 import React from 'react'
 import {Table} from 'react-bootstrap'
+import IdSearch from "./IdSearch";
+import FirstNameSearch from "./FirstNameSearch";
+import LastNameSearch from "./LastNameSearch";
 
 class Test extends React.Component {
 
@@ -13,9 +16,21 @@ class Test extends React.Component {
         filteredNote: ''
     }
 
-    handleInputChange = event => {
+    handleIdChange = event => {
         this.setState({
-            [event.target.name]: event.target.value
+            filteredId: event.target.value
+        })
+    }
+
+    handleFirstNameChange = event => {
+        this.setState({
+            filteredFirstName: event.target.value
+        })
+    }
+
+    handleLastNameChange = event => {
+        this.setState({
+            filteredLastName: event.target.value
         })
     }
 
@@ -42,52 +57,31 @@ class Test extends React.Component {
                     <thead>
                     <tr>
                         <td>
-                            <input
-                                name='filteredId'
-                                type='text'
-                                value={this.state.filteredId}
-                                onChange={this.handleInputChange}
+                            <IdSearch
+                                searchPhrase={this.state.filteredId}
+                                handleChange={this.handleIdChange}
                             />
                         </td>
                         <td>
-                            <input
-                                name='filteredFirstName'
-                                type='text'
-                                value={this.state.filteredFirstName}
-                                onChange={this.handleInputChange}
+                            <FirstNameSearch
+                                searchPhrase={this.state.filteredFirstName}
+                                handleChange={this.handleFirstNameChange}
                             />
                         </td>
                         <td>
-                            <input
-                                name='filteredLastName'
-                                type='text'
-                                value={this.state.filteredLastName}
-                                onChange={this.handleInputChange}
-                            />
+                           <LastNameSearch
+                               searchPhrase={this.state.filteredLastName}
+                               handleChange={this.handleLastNameChange}
+                           />
                         </td>
                         <td>
-                            <input
-                                name='filteredDateOfBirth'
-                                type='text'
-                                value={this.state.filteredDateOfBirth}
-                                onChange={this.handleInputChange}
-                            />
+
                         </td>
                         <td>
-                            <input
-                                name='filteredCompany'
-                                type='text'
-                                value={this.state.filteredCompany}
-                                onChange={this.handleInputChange}
-                            />
+
                         </td>
                         <td>
-                            <input
-                                name='filteredNote'
-                                type='text'
-                                value={this.state.filteredNote}
-                                onChange={this.handleInputChange}
-                            />
+
                         </td>
 
                     </tr>
@@ -102,9 +96,22 @@ class Test extends React.Component {
                     </thead>
                     <tbody>
                     {
-                        data && data.map(
+                        data && data
+                            .filter(
+                                data =>
+                                    data.id.toString().includes(this.state.filteredId)
+                            )
+                            .filter(
+                                data =>
+                                    data.firstName.toLowerCase().includes(this.state.filteredFirstName)
+                            )
+                            .filter(
+                                data =>
+                                    data.lastName.toLowerCase().includes(this.state.filteredLastName)
+                            )
+                            .map(
                             data =>
-                                <tr key={data.id}>
+                                <tr>
                                     <td>{data.id}</td>
                                     <td>{data.firstName}</td>
                                     <td>{data.lastName}</td>
