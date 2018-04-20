@@ -1,4 +1,5 @@
 import React from 'react'
+import {Table} from 'react-bootstrap'
 
 class Test extends React.Component {
 
@@ -20,16 +21,21 @@ class Test extends React.Component {
 
         return (
             <div>
-                <table>
+                <Table
+                    striped
+                    hover
+                    condensed
+                    responsive
+                >
                     <thead>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
                     </thead>
-                </table>
+                </Table>
             </div>
         )
     }
