@@ -3,6 +3,9 @@ import {Table} from 'react-bootstrap'
 import IdSearch from "./IdSearch";
 import FirstNameSearch from "./FirstNameSearch";
 import LastNameSearch from "./LastNameSearch";
+import DateOfBirthSearch from "./DateOfBirthSearch";
+import CompanySearch from "./CompanySearch";
+import NoteSearch from "./NoteSearch";
 
 class Test extends React.Component {
 
@@ -31,6 +34,24 @@ class Test extends React.Component {
     handleLastNameChange = event => {
         this.setState({
             filteredLastName: event.target.value
+        })
+    }
+
+    handleDateOfBirthChange = event => {
+        this.setState({
+            filteredDateOfBirth: event.target.value
+        })
+    }
+
+    handleCompanyChange = event => {
+        this.setState({
+            filteredCompany: event.target.value
+        })
+    }
+
+    handleNoteChange = event => {
+        this.setState({
+            filteredNote: event.target.value
         })
     }
 
@@ -69,19 +90,28 @@ class Test extends React.Component {
                             />
                         </td>
                         <td>
-                           <LastNameSearch
-                               searchPhrase={this.state.filteredLastName}
-                               handleChange={this.handleLastNameChange}
-                           />
+                            <LastNameSearch
+                                searchPhrase={this.state.filteredLastName}
+                                handleChange={this.handleLastNameChange}
+                            />
                         </td>
                         <td>
-
+                            <DateOfBirthSearch
+                                searchPhrase={this.state.filteredDateOfBirth}
+                                handleChange={this.handleDateOfBirthChange}
+                            />
                         </td>
                         <td>
-
+                            <CompanySearch
+                                searchPhrase={this.state.filteredCompany}
+                                handleChange={this.handleCompanyChange}
+                            />
                         </td>
                         <td>
-
+                            <NoteSearch
+                                searchPhrase={this.state.filteredNote}
+                                handleChange={this.handleNoteChange}
+                            />
                         </td>
 
                     </tr>
@@ -109,17 +139,29 @@ class Test extends React.Component {
                                 data =>
                                     data.lastName.toLowerCase().includes(this.state.filteredLastName)
                             )
+                            .filter(
+                                data =>
+                                    data.dateOfBirth.toString().includes(this.state.filteredDateOfBirth)
+                            )
+                            .filter(
+                                data =>
+                                    data.company.toLowerCase().includes(this.state.filteredCompany)
+                            )
+                            .filter(
+                                data =>
+                                    data.note.toString().includes(this.state.filteredNote)
+                            )
                             .map(
-                            data =>
-                                <tr>
-                                    <td>{data.id}</td>
-                                    <td>{data.firstName}</td>
-                                    <td>{data.lastName}</td>
-                                    <td>{data.dateOfBirth}</td>
-                                    <td>{data.company}</td>
-                                    <td>{data.note}</td>
-                                </tr>
-                        )
+                                data =>
+                                    <tr>
+                                        <td>{data.id}</td>
+                                        <td>{data.firstName}</td>
+                                        <td>{data.lastName}</td>
+                                        <td>{data.dateOfBirth}</td>
+                                        <td>{data.company}</td>
+                                        <td>{data.note}</td>
+                                    </tr>
+                            )
                     }
                     </tbody>
                 </Table>
