@@ -11,7 +11,9 @@ import './TestData.css'
 class Test extends React.Component {
 
     state = {
-        data: null,
+        currentPage: 1,
+        dataPerPage: 5,
+        data: [],
         filteredId: '',
         filteredFirstName: '',
         filteredLastName: '',
@@ -79,10 +81,43 @@ class Test extends React.Component {
         this.setState({data: arrayCopy});
     }
 
+    handlePageClick = event => {
+        this.setState({
+            currentPage: Number(event.target.id)
+        });
+    }
+
     render() {
 
-        const {data} = this.state
+        const {data, currentPage, dataPerPage} = this.state
 
+        const indexOfLast = currentPage * dataPerPage
+        const indexOfFirst = indexOfLast - dataPerPage
+
+
+        const pageNumbers = [];
+        for (let i = 1; i <= Math.ceil(data.length / dataPerPage); i++) {
+            pageNumbers.push(i);
+        }
+
+        const setPageNumbers = pageNumbers.map(number => {
+            return (
+                <div
+                    style={{
+                        display: 'inline-block',
+                        marginRight: '5px',
+                        marginLeft: '5px',
+                        cursor: 'pointer',
+                        color: 'blue'
+                    }}
+                    key={number}
+                    id={number}
+                    onClick={this.handlePageClick}
+                >
+                    {number}
+                </div>
+            );
+        });
         return (
             <div>
                 <Table
@@ -143,6 +178,7 @@ class Test extends React.Component {
                     <tbody>
                     {
                         data && data
+                            .slice(indexOfFirst, indexOfLast)
                             .filter(
                                 data =>
                                     data.id.toString().includes(this.state.filteredId)
@@ -180,6 +216,9 @@ class Test extends React.Component {
                             )
                     }
                     </tbody>
+                    <div>
+                        {setPageNumbers}
+                    </div>
                 </Table>
             </div>
         )
