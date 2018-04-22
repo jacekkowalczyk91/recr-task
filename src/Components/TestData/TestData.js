@@ -1,5 +1,5 @@
 import React from 'react'
-import {Table} from 'react-bootstrap'
+import {Table, Pagination} from 'react-bootstrap'
 import IdSearch from "./IdSearch";
 import FirstNameSearch from "./FirstNameSearch";
 import LastNameSearch from "./LastNameSearch";
@@ -64,7 +64,21 @@ class Test extends React.Component {
         )
     }
 
+    compareBy = key => (a, b) => {
+            if (a[key] < b[key]) return -1;
+            if (a[key] > b[key]) return 1;
+            return 0;
+        };
+    }
+
+    sortBy = key => {
+        let dataCopy = [...this.state.data];
+        dataCopy.sort(this.compareBy(key));
+        this.setState({data: dataCopy});
+    };
+
     render() {
+
         const {data} = this.state
 
         return (
@@ -116,7 +130,7 @@ class Test extends React.Component {
 
                     </tr>
                     <tr>
-                        <th>id</th>
+                        <th onClick={() => this.sortBy('id')}>id</th>
                         <th>First name</th>
                         <th>Last name</th>
                         <th>Date of birth</th>
