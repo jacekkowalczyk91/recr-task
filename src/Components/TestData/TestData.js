@@ -1,11 +1,12 @@
 import React from 'react'
-import {Table, Pagination} from 'react-bootstrap'
+import {Table} from 'react-bootstrap'
 import IdSearch from "./IdSearch";
 import FirstNameSearch from "./FirstNameSearch";
 import LastNameSearch from "./LastNameSearch";
 import DateOfBirthSearch from "./DateOfBirthSearch";
 import CompanySearch from "./CompanySearch";
 import NoteSearch from "./NoteSearch";
+import './TestData.css'
 
 class Test extends React.Component {
 
@@ -64,7 +65,8 @@ class Test extends React.Component {
         )
     }
 
-    compareBy = key => (a, b) => {
+    compareBy = key => {
+        return function (a, b) {
             if (a[key] < b[key]) return -1;
             if (a[key] > b[key]) return 1;
             return 0;
@@ -72,10 +74,10 @@ class Test extends React.Component {
     }
 
     sortBy = key => {
-        let dataCopy = [...this.state.data];
-        dataCopy.sort(this.compareBy(key));
-        this.setState({data: dataCopy});
-    };
+        let arrayCopy = [...this.state.data];
+        arrayCopy.sort(this.compareBy(key));
+        this.setState({data: arrayCopy});
+    }
 
     render() {
 
@@ -131,11 +133,11 @@ class Test extends React.Component {
                     </tr>
                     <tr>
                         <th onClick={() => this.sortBy('id')}>id</th>
-                        <th>First name</th>
-                        <th>Last name</th>
-                        <th>Date of birth</th>
-                        <th>Company</th>
-                        <th>Note</th>
+                        <th onClick={() => this.sortBy('firstName')}>First name</th>
+                        <th onClick={() => this.sortBy('lastName')}>Last name</th>
+                        <th onClick={() => this.sortBy('dateOfBirth')}>Date of birth</th>
+                        <th onClick={() => this.sortBy('company')}>Company</th>
+                        <th onClick={() => this.sortBy('note')}>Note</th>
                     </tr>
                     </thead>
                     <tbody>
