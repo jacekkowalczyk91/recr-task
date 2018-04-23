@@ -1,6 +1,6 @@
 import React from 'react'
 
-class IdSearch extends React.Component {
+class Search extends React.Component {
 
     handleChange = event => {
         this.setState({
@@ -18,4 +18,4 @@ class IdSearch extends React.Component {
     }
 }
 
-export default IdSearch
+export default Search

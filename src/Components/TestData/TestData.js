@@ -1,11 +1,6 @@
 import React from 'react'
 import {Table} from 'react-bootstrap'
-import IdSearch from "./IdSearch";
-import FirstNameSearch from "./FirstNameSearch";
-import LastNameSearch from "./LastNameSearch";
-import DateOfBirthSearch from "./DateOfBirthSearch";
-import CompanySearch from "./CompanySearch";
-import NoteSearch from "./NoteSearch";
+import Search from "./Search";
 import './TestData.css'
 
 class Test extends React.Component {
@@ -87,6 +82,7 @@ class Test extends React.Component {
         });
     }
 
+
     render() {
 
         const {data, currentPage, dataPerPage} = this.state
@@ -129,37 +125,37 @@ class Test extends React.Component {
                     <thead>
                     <tr>
                         <td>
-                            <IdSearch
+                            <Search
                                 searchPhrase={this.state.filteredId}
                                 handleChange={this.handleIdChange}
                             />
                         </td>
                         <td>
-                            <FirstNameSearch
+                            <Search
                                 searchPhrase={this.state.filteredFirstName}
                                 handleChange={this.handleFirstNameChange}
                             />
                         </td>
                         <td>
-                            <LastNameSearch
+                            <Search
                                 searchPhrase={this.state.filteredLastName}
                                 handleChange={this.handleLastNameChange}
                             />
                         </td>
                         <td>
-                            <DateOfBirthSearch
+                            <Search
                                 searchPhrase={this.state.filteredDateOfBirth}
                                 handleChange={this.handleDateOfBirthChange}
                             />
                         </td>
                         <td>
-                            <CompanySearch
+                            <Search
                                 searchPhrase={this.state.filteredCompany}
                                 handleChange={this.handleCompanyChange}
                             />
                         </td>
                         <td>
-                            <NoteSearch
+                            <Search
                                 searchPhrase={this.state.filteredNote}
                                 handleChange={this.handleNoteChange}
                             />
@@ -205,7 +201,7 @@ class Test extends React.Component {
                             )
                             .map(
                                 data =>
-                                    <tr>
+                                    <tr key={data.id}>
                                         <td>{data.id}</td>
                                         <td>{data.firstName}</td>
                                         <td>{data.lastName}</td>
@@ -216,10 +212,10 @@ class Test extends React.Component {
                             )
                     }
                     </tbody>
-                    <div>
-                        {setPageNumbers}
-                    </div>
                 </Table>
+                <div>
+                    {setPageNumbers}
+                </div>
             </div>
         )
     }
