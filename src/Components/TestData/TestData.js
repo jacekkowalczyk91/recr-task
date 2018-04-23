@@ -9,7 +9,6 @@ import 'react-datepicker/dist/react-datepicker.css'
 class Test extends React.Component {
 
     state = {
-        date: '22/11/2017',
         startDate: moment(),
         currentPage: 1,
         dataPerPage: 5,
@@ -25,8 +24,9 @@ class Test extends React.Component {
     handleDateChange = (date) => {
         this.setState({
             startDate: date,
+            filteredDateOfBirth: moment(date).format('DD.MM.YYYY')
         })
-}
+    }
 
     handleIdChange = event => {
         this.setState({
@@ -43,12 +43,6 @@ class Test extends React.Component {
     handleLastNameChange = event => {
         this.setState({
             filteredLastName: event.target.value
-        })
-    }
-
-    handleDateOfBirthChange = event => {
-        this.setState({
-            filteredDateOfBirth: event.target.value
         })
     }
 
