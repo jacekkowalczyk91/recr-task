@@ -2,10 +2,15 @@ import React from 'react'
 import {Table} from 'react-bootstrap'
 import Search from "./Search";
 import './TestData.css'
+import DatePicker from 'react-datepicker'
+import moment from 'moment'
+import 'react-datepicker/dist/react-datepicker.css'
 
 class Test extends React.Component {
 
     state = {
+        date: '22/11/2017',
+        startDate: moment(),
         currentPage: 1,
         dataPerPage: 5,
         data: [],
@@ -16,6 +21,12 @@ class Test extends React.Component {
         filteredCompany: '',
         filteredNote: ''
     }
+
+    handleDateChange = (date) => {
+        this.setState({
+            startDate: date,
+        })
+}
 
     handleIdChange = event => {
         this.setState({
@@ -98,7 +109,7 @@ class Test extends React.Component {
 
         const setPageNumbers = pageNumbers.map(number => {
             return (
-                <div
+                <button
                     style={{
                         display: 'inline-block',
                         marginRight: '5px',
@@ -111,9 +122,9 @@ class Test extends React.Component {
                     onClick={this.handlePageClick}
                 >
                     {number}
-                </div>
+                </button>
             );
-        });
+        })
         return (
             <div>
                 <Table
@@ -143,9 +154,10 @@ class Test extends React.Component {
                             />
                         </td>
                         <td>
-                            <Search
-                                searchPhrase={this.state.filteredDateOfBirth}
-                                handleChange={this.handleDateOfBirthChange}
+                            <DatePicker
+                                selected={this.state.startDate}
+                                onChange={this.handleDateChange}
+                                dateFormat='DD/MM/YYYY'
                             />
                         </td>
                         <td>
@@ -189,7 +201,7 @@ class Test extends React.Component {
                             )
                             .filter(
                                 data =>
-                                    data.dateOfBirth.toString().includes(this.state.filteredDateOfBirth)
+                                    data.dateOfBirth.includes(this.state.filteredDateOfBirth)
                             )
                             .filter(
                                 data =>
