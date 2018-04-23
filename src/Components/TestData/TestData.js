@@ -9,6 +9,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 class Test extends React.Component {
 
     state = {
+        newData: [],
         startDate: moment(),
         currentPage: 1,
         dataPerPage: 5,
@@ -23,6 +24,7 @@ class Test extends React.Component {
 
     handleDateChange = (date) => {
         this.setState({
+            newData: this.state.data.map(elem => elem.dateOfBirth).map(el => el.split(' ')[0]).map(el => moment(new Date(el.split('.').reverse())).format('DD/MM/YYYY')),
             startDate: date,
             filteredDateOfBirth: moment(date).format('DD.MM.YYYY')
         })
@@ -222,6 +224,8 @@ class Test extends React.Component {
                 <div>
                     {setPageNumbers}
                 </div>
+                {console.log(this.state.data.map(elem => elem.dateOfBirth).map(el => el.split(' ')[0]).map(el => moment(new Date(el.split('.').reverse())).format('DD/MM/YYYY'))
+                )}
             </div>
         )
     }
